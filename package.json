@@ -1,0 +1,35 @@
+{
+  "name": "node-template-dev-env",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js -e js,scss,sass,twig",
+    "build-dist": "node build.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
+    "express": "~4.16.1",
+    "express-list-endpoints": "^4.0.1",
+    "fs-extra": "^8.1.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "node-sass-middleware": "0.11.0",
+    "twig": "~0.10.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.19.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public/dist/*"
+    ],
+    "delay": "2500"
+  }
+}
