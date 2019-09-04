@@ -29,8 +29,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "public/dist/*"
+      "dist/*"
     ],
-    "delay": "2500"
+    "delay": "250"
   }
 }
