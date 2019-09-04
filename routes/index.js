@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs-extra');
+const path = require('path');
+const klawSync = require('klaw-sync');
 const router = express.Router();
 const listEndpoints = require('express-list-endpoints');
 
@@ -40,7 +42,25 @@ router.get('/build-all', async function (req, res) {
     let successfulPaths = [];
     let failedPaths = [];
 
-    fs.emptyDirSync(process.env.DIST_DIR);
+    let distPaths;
+    let ignoredPaths = ['.git', '.gitignore', '.gitkeep'];
+
+    const filterIgnoredPaths = item => {
+      const basename = path.basename(item.path);
+      let counter = 0;
+      for (const ignoredPath of ignoredPaths) {
+        if (basename === ignoredPath) counter++;
+      }
+      if (counter === 0) return true;
+      else return false;
+    };
+
+    distPaths = klawSync(process.env.DIST_DIR, { filter: filterIgnoredPaths });
+    for (const pathObj of distPaths) {
+      fs.remove(pathObj.path);
+      console.log(pathObj.path);
+    }
+
     fs.ensureDirSync(process.env.DIST_DIR + '/assets');
     fs.copySync('public/assets/fonts', process.env.DIST_DIR + '/assets/fonts');
     fs.copySync('public/assets/images', process.env.DIST_DIR + '/assets/images');
