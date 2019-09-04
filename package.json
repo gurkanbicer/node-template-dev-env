@@ -15,6 +15,7 @@
     "express-list-endpoints": "^4.0.1",
     "fs-extra": "^8.1.0",
     "http-errors": "~1.6.3",
+    "klaw-sync": "^6.0.0",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
     "twig": "~0.10.3"
